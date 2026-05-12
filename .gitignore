@@ -72,5 +72,5 @@ global.json.lock
 
 Migrations/
 
-*.jpg
-*.png
+wwwroot/images/*/*.jpg
+wwwroot/images/*/*.png

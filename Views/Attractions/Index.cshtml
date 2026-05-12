@@ -1,0 +1,63 @@
+@model IEnumerable<TourismGuide.Web.Models.Attraction>
+
+@{
+    ViewData["Title"] = "Достопримечательности";
+}
+
+<h2>Достопримечательности</h2>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Найти по названию:
+            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Поиск" class="btn btn-primary" /> |
+            <a asp-action="Index">Полный список</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Город</th>
+            <th>Часы работы</th>
+            <th>Стоимость</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (!string.IsNullOrEmpty(item.PhotoImageFileName))
+                {
+                    <img src="~/images/attractions/@item.PhotoImageFileName"
+                         alt="@item.Name" style="max-width: 80px; max-height: 60px;" />
+                }
+                else
+                {
+                    @:—
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.Name)
+            </td>
+            <td>
+                @(item.OpeningHours ?? "Не указаны")
+            </td>
+            <td>
+                @(item.TicketPrice.HasValue ? item.TicketPrice.Value.ToString("C") : "Бесплатно")
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

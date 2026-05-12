@@ -1,0 +1,58 @@
+@model IEnumerable<TourismGuide.Web.Models.City>
+
+@{
+    ViewData["Title"] = "Города";
+}
+
+<h2>Города</h2>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Найти по названию:
+            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Поиск" class="btn btn-primary" /> |
+            <a asp-action="Index">Вернуться к полному списку</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Фото</th> <!-- Новая колонка -->
+            <th>Название</th>
+            <th>Регион</th>
+            <th>Население</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td> <!-- Новая ячейка -->
+                @if (!string.IsNullOrEmpty(item.PhotoImageFileName))
+                {
+                    <img src="~/images/cities/@item.PhotoImageFileName" alt="@item.Name" style="max-width: 100px; max-height: 100px;" />
+                }
+                else
+                {
+                    @: -
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @item.Population.ToString("N0") <!-- Используем ToString для форматирования чисел -->
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

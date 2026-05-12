@@ -1,0 +1,76 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+*.VC.db
+*.VC.VC.opendb
+*.user
+*.userosscache
+*.suo
+*.csproj.user
+*.vbproj.user
+*.fsproj.user
+*.userprefs
+project.lock.json
+project.fragment.lock.json
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains Rider
+[Rr]ider/
+*.sln.iml
+*.sln.DotSettings.user
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# NPM
+node_modules/
+
+# ASP.NET Core
+# Игнорировать файлы БД SQLite (и другие файлы БД, если появятся)
+*.db
+# Игнорировать файлы логов
+*.log
+logs/
+
+# User secrets (если используются)
+**/secrets.user
+# Игнорировать локальные конфигурации (часто содержат чувствительные данные или локальные пути)
+**/appsettings.Development.json
+**/appsettings.Production.json
+# Но НЕ игнорировать основной appsettings.json, он нужен для настроек по умолчанию
+
+# NuGet Packages
+*.nupkg
+# Временные папки NuGet
+NuGetScratch/
+[Nn]uGetTemp/
+
+# Global.json lock file
+global.json.lock
+
+Migrations/
+
+*.jpg
+*.png

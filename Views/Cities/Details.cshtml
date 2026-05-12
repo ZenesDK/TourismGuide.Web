@@ -1,0 +1,68 @@
+@model TourismGuide.Web.Models.City
+
+@{
+    ViewData["Title"] = $"Информация о городе: {Model.Name}";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Регион</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Region)</dd>
+
+            <dt class="col-sm-4">Население</dt>
+            <dd class="col-sm-8">@Model.Population.ToString("N0")</dd>
+
+            <dt class="col-sm-4">История</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.History)</dd>
+        </dl>
+
+        @if (!string.IsNullOrEmpty(Model.CoatOfArmsImageFileName))
+        {
+            <div class="mt-3">
+                <h4>Герб</h4>
+                <img src="~/images/cities/@Model.CoatOfArmsImageFileName"
+                     alt="Герб @Model.Name"
+                     class="img-fluid rounded" style="max-width: 200px;" />
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.PhotoImageFileName))
+        {
+            <div class="mt-3">
+                <h4>Фотография города</h4>
+                <img src="~/images/cities/@Model.PhotoImageFileName"
+                     alt="@Model.Name"
+                     class="img-fluid rounded" />
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <h3>Достопримечательности</h3>
+        @if (Model.Attractions.Any())
+        {
+            <ul class="list-group">
+                @foreach (var a in Model.Attractions)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a asp-controller="Attractions" asp-action="Details" asp-route-id="@a.Id">@a.Name</a>
+                        @if (!string.IsNullOrEmpty(a.PhotoImageFileName))
+                        {
+                            <img src="~/images/attractions/@a.PhotoImageFileName"
+                                 alt="@a.Name" class="rounded" style="height: 40px;" />
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Достопримечательности пока не добавлены.</p>
+        }
+    </div>
+</div>
+
+<hr />
+<a asp-action="Index" class="btn btn-outline-secondary">Вернуться к списку городов</a>
